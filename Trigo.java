@@ -1,13 +1,12 @@
 package almacen;
-import java.util.Scanner;
-public class Maiz extends Producto {
+
+public class Trigo extends Producto {
 	public static int kilosAlmacenados;
 
-	public Maiz() {
+	public Trigo() {
 		super();
 		kilosAlmacenados = 0;
 	}
-	static Scanner sc = new Scanner(System.in);
 
 	public static double getPrecio() {
 		return precio;
@@ -17,12 +16,12 @@ public class Maiz extends Producto {
 		precio = precioIntroducido;
 	}
 
-	public static double getPesoEspecifico() {
-		return pesoEspecifico;
-	}
-
 	public static void setPesoEspecifico(double pesoEspecificoIntroducido) {
 		pesoEspecifico = pesoEspecificoIntroducido;
+	}
+
+	public static double getPesoEspecifico() {
+		return pesoEspecifico;
 	}
 
 	public static double getHumedad() {
@@ -35,9 +34,7 @@ public class Maiz extends Producto {
 
 	public static void sumarKilos(int valor) {
 		if (valor < 0) {
-			System.out.println("No se pueden sumar numeros negativos, intentalo de nuevo:");
-			int kilosAComprar = sc.nextInt();
-			comprarKilos(kilosAComprar);
+			System.out.println("No se pueden sumar numeros negativos.");
 		} else {
 			kilosAlmacenados += valor;
 		}
@@ -46,8 +43,6 @@ public class Maiz extends Producto {
 	public static void restarKilos(int valor) {
 		if (valor < 0 || kilosAlmacenados < valor) {
 			System.out.println("Operacion no valida/Fuera de existencias");
-			int kilosAVender = sc.nextInt();
-			venderKilos(kilosAVender);
 		} else {
 			kilosAlmacenados -= valor;
 		}
@@ -60,7 +55,7 @@ public class Maiz extends Producto {
 	public static void getDetalles() {
 		System.out.println("############################################################");
 		System.out.println("## Se tienen en el almacen:");
-		System.out.println("## "+getKilosAlmacenados() + " kg de maiz.");
+		System.out.println("## "+getKilosAlmacenados() + " kg de trigo.");
 		System.out.println("## Humedad: " + getHumedad() + "%.");
 		System.out.println("## Peso especifico: " + getPesoEspecifico() + " Kg/m3.");
 		System.out.println("## Precio actual: " + getPrecio() + " €/T.");
