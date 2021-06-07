@@ -38,79 +38,80 @@ public class Producto {
 					tipoAIntroducir = sc.nextInt();
 				}
 			}
-		} catch (InputMismatchException letra) {
-			System.out.println("Introduce un numero no una letra.");
-		}
 
-		boolean valorGestion = false;
-		while (valorGestion == false) {
-			System.out.println("Gestiones de " + tipo + ":");
-			System.out.println("1. Establecer precio.");
-			System.out.println("2. Establecer humedad.");
-			System.out.println("3. Establecer peso especifico.");
-			System.out.println("4. Comprar kilos.");
-			System.out.println("5. Vender kilos.");
-			System.out.println("6. Ver detalles del producto.");
-			System.out.println("7. Salir y resetear valores.");
-			int gestion = sc.nextInt();
-			if (gestion > 0 && gestion < 9) {
-				switch (gestion) {
-				case 1:
-					try {
-						System.out.println("Introduce el precio: ");
-						double precioAIntroducir = sc.nextDouble();
-						setPrecio(precioAIntroducir);
-					} catch (InputMismatchException letra) {
-						System.out.println("Introduce los datos con comas, no con puntos.");
-					}
-					break;
-				case 2:
-					try {
-						System.out.println("Introduce la humedad: ");
-						double humedadAIntroducir = sc.nextDouble();
-						setHumedad(humedadAIntroducir);
-					} catch (InputMismatchException letra) {
-						System.out.println("Introduce los datos con comas, no con puntos.");
-					}
-					break;
-				case 3:
-					try {
-						System.out.println("Introduce el peso especifico: ");
-						double pesoEspecificoAIntroducir = sc.nextDouble();
-						setPesoEspecifico(pesoEspecificoAIntroducir);
-					} catch (InputMismatchException letra) {
-						System.out.println("Introduce los datos con comas, no con puntos.");
-					}
+			boolean valorGestion = false;
+			while (valorGestion == false) {
+				System.out.println("Gestiones de " + tipo + ":");
+				System.out.println("1. Establecer precio.");
+				System.out.println("2. Establecer humedad.");
+				System.out.println("3. Establecer peso especifico.");
+				System.out.println("4. Comprar kilos.");
+				System.out.println("5. Vender kilos.");
+				System.out.println("6. Ver detalles del producto.");
+				System.out.println("7. Salir y resetear valores.");
+				int gestion = sc.nextInt();
+				if (gestion > 0 && gestion < 9) {
+					switch (gestion) {
+					case 1:
+						try {
+							System.out.println("Introduce el precio: ");
+							double precioAIntroducir = sc.nextDouble();
+							setPrecio(precioAIntroducir);
+						} catch (InputMismatchException letra) {
+							System.out.println("Introduce los datos con comas, no con puntos.");
+						}
+						break;
+					case 2:
+						try {
+							System.out.println("Introduce la humedad: ");
+							double humedadAIntroducir = sc.nextDouble();
+							setHumedad(humedadAIntroducir);
+						} catch (InputMismatchException letra) {
+							System.out.println("Introduce los datos con comas, no con puntos.");
+						}
+						break;
+					case 3:
+						try {
+							System.out.println("Introduce el peso especifico: ");
+							double pesoEspecificoAIntroducir = sc.nextDouble();
+							setPesoEspecifico(pesoEspecificoAIntroducir);
+						} catch (InputMismatchException letra) {
+							System.out.println("Introduce los datos con comas, no con puntos.");
+						}
 
-					break;
-				case 4:
-					try {
-						System.out.println("Introduce los kilos a comprar: ");
-						int kilosAComprar = sc.nextInt();
-						comprarKilos(kilosAComprar);
-					} catch (InputMismatchException letra) {
-						System.out.println("Introduce numeros no caracteres,");
+						break;
+					case 4:
+						try {
+							System.out.println("Introduce los kilos a comprar: ");
+							int kilosAComprar = sc.nextInt();
+							comprarKilos(kilosAComprar);
+						} catch (InputMismatchException letra) {
+							System.out.println("Introduce numeros no caracteres,");
+						}
+						break;
+					case 5:
+						try {
+							System.out.println("Introduce los kilos a vender: ");
+							int kilosAVender = sc.nextInt();
+							venderKilos(kilosAVender);
+						} catch (InputMismatchException letra) {
+							System.out.println("Introduce numeros no caracteres,");
+						}
+						break;
+					case 6:
+						getDetallesDelProducto();
+						break;
+					case 7:
+						valorGestion = true;
+						break;
 					}
-					break;
-				case 5:
-					try {
-						System.out.println("Introduce los kilos a vender: ");
-						int kilosAVender = sc.nextInt();
-						venderKilos(kilosAVender);
-					} catch (InputMismatchException letra) {
-						System.out.println("Introduce numeros no caracteres,");
-					}
-					break;
-				case 6:
-					getDetallesDelProducto();
-					break;
-				case 7:
-					valorGestion = true;
-					break;
 				}
 			}
-		}
 
+		} catch (InputMismatchException letra) {
+			System.out.println("Introduce un numero no una letra.");
+			sc.next();
+		}
 	}
 
 	public static double getPrecio() {
