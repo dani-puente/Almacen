@@ -57,13 +57,26 @@ public class Maiz extends Producto {
 		return kilosAlmacenados;
 	}
 
-	public static void getDetalles() {
-		System.out.println("############################################################");
-		System.out.println("## Se tienen en el almacen:");
-		System.out.println("## "+getKilosAlmacenados() + " kg de maiz.");
-		System.out.println("## Humedad: " + getHumedad() + "%.");
-		System.out.println("## Peso especifico: " + getPesoEspecifico() + " Kg/m3.");
-		System.out.println("## Precio actual: " + getPrecio() + " €/T.");
-		System.out.println("############################################################");
+	public static String getDetalles() {
+		String ADevolver = "############################################################\n"
+				+ "## Se tienen en el almacen:\n"
+				+ "## "+getKilosAlmacenados() + " kg de maiz.\n"
+				+ "## Humedad: " + getHumedad() + "%.\n"
+				+ "## Peso especifico: " + getPesoEspecifico() + " Kg/m3.\n"
+				+ "## Precio actual: " + getPrecio() + " €/T.\n"
+				+ "############################################################";
+		
+		return ADevolver;
+		/*
+		 * System.out.println(
+		 * "############################################################");
+		 * System.out.println("## Se tienen en el almacen:");
+		 * System.out.println("## "+getKilosAlmacenados() + " kg de maiz.");
+		 * System.out.println("## Humedad: " + getHumedad() + "%.");
+		 * System.out.println("## Peso especifico: " + getPesoEspecifico() + " Kg/m3.");
+		 * System.out.println("## Precio actual: " + getPrecio() + " €/T.");
+		 * System.out.println(
+		 * "############################################################");
+		 */
 	}
 }

@@ -3,6 +3,7 @@ package almacen;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.io.*;
 
 public class Producto {
 	public static String tipo;
@@ -19,22 +20,26 @@ public class Producto {
 		kilos = 0;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Scanner sc = new Scanner(System.in);
+		FileWriter fichero = new FileWriter("C:/Users/Dani_Asir2/Desktop/fichero.txt");
 		System.out.println("Introduce el tipo; maiz(1), trigo(2): ");
 		try {
 			int tipoAIntroducir = sc.nextInt();
 			boolean tipoCorrecto = false;
 			while (tipoCorrecto == false) {
-				if (tipoAIntroducir > 0 && tipoAIntroducir < 3) {
-					if (tipoAIntroducir == 1) {
-						tipo = "maiz";
-					} else {
-						tipo = "trigo";
+				try {
+					if (validarNumero(tipoAIntroducir) == true) {
+						if (tipoAIntroducir == 1) {
+							tipo = "maiz";
+						} else {
+							tipo = "trigo";
+						}
 					}
 					tipoCorrecto = true;
-				} else {
-					System.out.println("Introduce un producto valido (Maiz(1), trigo(2)");
+
+				} catch (ExcepcionNum e1) {
+					System.out.println(e1);
 					tipoAIntroducir = sc.nextInt();
 				}
 			}
@@ -47,10 +52,11 @@ public class Producto {
 				System.out.println("3. Establecer peso especifico.");
 				System.out.println("4. Comprar kilos.");
 				System.out.println("5. Vender kilos.");
-				System.out.println("6. Ver detalles del producto.");
-				System.out.println("7. Salir y resetear valores.");
+				System.out.println("6. Crear fichero con detalles del producto.");
+				System.out.println("7. Leer fichero con detalles del producto.");
+				System.out.println("8. Salir y resetear valores.");
 				int gestion = sc.nextInt();
-				if (gestion > 0 && gestion < 9) {
+				if (gestion > 0 && gestion < 10) {
 					switch (gestion) {
 					case 1:
 						try {
@@ -99,15 +105,20 @@ public class Producto {
 						}
 						break;
 					case 6:
-						getDetallesDelProducto();
+						fichero.write(getDetallesDelProducto());
+						fichero.close();
 						break;
 					case 7:
+						System.out.println("Introduce la direccion del archivo a leer: ");
+						String direccion = sc.next();
+						System.out.println(leerFichero(direccion));
+						break;
+					case 8:
 						valorGestion = true;
 						break;
 					}
 				}
 			}
-
 		} catch (InputMismatchException letra) {
 			System.out.println("Introduce un numero no una letra.");
 			sc.next();
@@ -194,11 +205,39 @@ public class Producto {
 		}
 	}
 
-	public static void getDetallesDelProducto() {
+	public static String getDetallesDelProducto() {
+		String ADevolver = "";
 		if (tipo.equals("maiz")) {
-			Maiz.getDetalles();
+			ADevolver = Maiz.getDetalles();
 		} else {
-			Trigo.getDetalles();
+			ADevolver = Trigo.getDetalles();
 		}
+		return ADevolver;
+	}
+
+	public static boolean validarNumero(int num) throws ExcepcionNum {
+		boolean aDevolver = false;
+		if (num < 0 || num > 3) {
+			throw new ExcepcionNum("Introduce un producto valido (Maiz(1), trigo(2)");
+		} else {
+			aDevolver = true;
+		}
+		return aDevolver;
+	}
+	
+	public static String leerFichero(String direccion) {
+		String ADevolver = "";
+		try {
+			BufferedReader bf = new BufferedReader(new FileReader(direccion));
+			String temp = "";
+			String bfRead;
+			while((bfRead = bf.readLine()) != null) {
+				temp += bfRead + "\n";	
+			}
+			ADevolver = temp;
+		} catch(Exception empty) {
+			System.out.println("No se encontro el archivo");
+		}
+		return ADevolver;
 	}
 }
