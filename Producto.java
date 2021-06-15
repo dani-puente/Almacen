@@ -22,7 +22,6 @@ public class Producto {
 
 	public static void main(String[] args) throws IOException {
 		Scanner sc = new Scanner(System.in);
-		FileWriter fichero = new FileWriter("C:/Users/Dani_Asir2/Desktop/fichero.txt");
 		System.out.println("Introduce el tipo; maiz(1), trigo(2): ");
 		try {
 			int tipoAIntroducir = sc.nextInt();
@@ -105,8 +104,16 @@ public class Producto {
 						}
 						break;
 					case 6:
-						fichero.write(getDetallesDelProducto());
-						fichero.close();
+						System.out.println("Introduce la ruta donde guardar el fichero: ");
+						String ubicacionFichero = sc.next();
+						FileWriter fichero = new FileWriter(ubicacionFichero);
+						try {
+							fichero.write(getDetallesDelProducto());
+							fichero.close();
+						} catch(Exception error) {
+							System.out.println("No se encontro una ubicacion correcta.");
+						}
+
 						break;
 					case 7:
 						System.out.println("Introduce la direccion del archivo a leer: ");
